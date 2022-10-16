@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        函数没有this 没有实例化对象所以用不了refs和state
+        但是可以用props因为函数可以接受参数
+     -->
+    <script>
+     function Person (props){
+        const {name,age,sex} = this.props
+  return (
+    <ul>
+                    <li>姓名{name}</li>    
+                    <li>年龄{age}</li>    
+                    <li>性别{sex}</li>    
+                    </ul>
+  )
+     }
+     Person.proptypes={
+      
+                 name:React.Proptypes.string.isRequired,
+                 sex:React.Proptypes.string,
+                 age:React.Proptypes.number
+            }
+     
+            Person.defaultProps={
+                name:"tom",
+                sex:"nv",
+                age:19
+            }
+     ReactDom.render(<Person name="tom" sex="男" age={19} />,document.querySelector("div"))
+    </script>
+</body>
+</html>

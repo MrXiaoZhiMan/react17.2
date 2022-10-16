@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+
+     -->
+     <script>
+        class Person extends React.Component{
+            // 构造器constructor接受到props传给super super可以不写
+            constructor(props){
+                // 构造器中是否接受props是否传递给super 取决于是否
+                // 希望在构造器函数中通过this访问props
+                super(props)
+                // 构造器函数中 constructor接了props也传了 那么 可以
+                // 用this.props（实例.props）得到里面的值 
+                // 要是不接也不传那么就接不到里面的值 是 undefined
+        //   接了不传也是undefined
+            }
+
+            // 设置规则proptypes设置这个方法react就会自动进
+            // 行属性的限制
+            static proptypes={
+                // Proptypes是react的内置对象 react会在里面找你
+                // 要限制的对象
+                 name:React.Proptypes.string.isRequired,
+                 sex:React.Proptypes.string,
+                 age:React.Proptypes.number
+            }
+            // 设置默认值 static 这个方法就将prototypes这个方法放在了 类的自身上
+            // 这是设置属性的默认值
+            static defaultProps={
+                name:"tom",
+                sex:"nv",
+                age:19
+            }
+            render(){
+                const {name,age,sex} = this.props;
+                return (
+                    <ul>
+                    <li>姓名</li>    
+                    <li>年龄</li>    
+                    <li>性别</li>    
+                    </ul>
+                )
+            }
+        }
+        ReactDom.render(<Person name="tom" age={19} sex="男"/>)
+     </script>
+</body>
+</html>

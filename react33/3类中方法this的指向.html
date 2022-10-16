@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        
+     -->
+     <script>
+        class Person {
+            constructor(name,age){
+                // super()
+                this.name=name;
+                this.age=age;
+
+            }
+            // study 放在了类的原型对象上，供实例使用
+            // 通过person实例调用Person时，speak中的this指向Person实例
+            study(){
+                console.log(this);
+                // 类中所有定义的方法 局部都开启了严格模式 是
+                //  类自动开的 跟babel没有关系
+            }
+        }
+        const p1=new Person("tom",18)
+     </script>
+</body>
+</html>

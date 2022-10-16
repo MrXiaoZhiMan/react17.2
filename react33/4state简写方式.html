@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="test"></div>
+ 
+     <script>
+     class Weather extends React.Component{       
+    
+        // 在class类中写一个赋值语句 就挂在Weather实例对象中添加一个属性state后边为值
+        state={isHot:false,wind:"威风"}
+        
+        render(){
+            const {isHot} = this.state
+            return <h2 onClick={this.changeWeather}>今天天气很{isHot?"炎热":"凉爽"}</h2>
+   
+        }                      
+        //  a="hjk" 再类中创建一个赋值语句就相当于在类的实例对象中添加
+        // 一个属性与值
+    changeWeather=()=>{ //changeWeather是自定义方法 要用赋值语句的形式，
+        // 加箭头函数的形式
+
+        // 箭头函数的this是他的上一级的this指向
+        const isHot = this.isHot;
+     this.setState({isHot:!isHot})
+     }
+    }
+     ReactDom.render(<Weather/>,document.querySelector("#test"))
+     </script>
+</body>
+<!-- 
+     
+        react可以将数据转化为虚拟dom进而生成真实dom渲染到页面上
+      状态 state 驱动着页面 而数据写在state上
+    1  有状态的叫做复杂组件 没有状态的叫做简单组件（ function组件里面没有this
+      也没有state 可通过hooks实现 没有this是因为他是通过bable调用的 会生成
+      严格模式 里面的this禁止指向window所以this为undefined）
+    2 state：是组件实例对象上的 不是组件类本身上的
+    
+             // 他能接到什么取决于new的实例传过来什么 new Heather这个动作是react做的
+        //    掉不掉super是类本身就有这个语法 而不是react规定的
+            // 因为要对组件实例进行初始化 所以要写 constructor 就是王实例里面写数据
+        // state是new出来的实例对象里面的 this指向实例对象 点一下就可以使用 而state
+        // 要写成对象的形式 这是react规定的
+        // this.state= {数据} 就将数据放在了 state身上
+        // 状态驱动着页面得显示
+
+        // 解决changeWeather里面的this指向问题
+        // bind方法在调用这个函数是会新建一个函数并且改变这个函数里面的this指向 
+        // 这行代码this.changeWeather.bind(this)就是新建一个函数而且将这个新建的函数
+        // 里面的this指向了 Weather的实例对象 赋值给 实例对象并且起了个名字 下面的
+        // onclick的this.changeWeather指向的就是实例自身的那个
+        //  在Weather实例对象中可以看到他
+
+            // 点击调用changeWeather这个函数 因为这个函数changeWeather是Weather的原型上
+            // 供实例使用 所以this.changeWeather才可以调用这个函数
+            // 上面onclick里面要写函数的类型不能是string “” 这种
+            // 在渲染组讲的时候 react创建了一个实例 通过实例调用一个render
+            // 要拿到返回值就要执行return后面的语句 要是写成demo()就相当于把函数的
+            // 调用的返回值赋值过去给onclick 用demo()这总就相当于将demo调用的返回值
+            // 复制给了onclick 因为没有return  所以它的返回值是undefined，
+            // 控制台有数据是因为 demo加了() 调用了所以有数据
+    //  函数体里面可以写任意的代码 但是类组建立不行 定义方法 不能写function
+    // changeWeather放在了哪里？ -- 放在了Weather的原型上，供实例使用
+    // 通过Weather实例调用 changeWeather 是 changeWeather中的this就是Weather实例
+
+                  // console.log("此处修改isHot的值");
+//    在标签 <h2>中调用这个方法时 时thsi.changeWeather他是将
+    // 由于changeWeather是作为onclick的回调，所以不是通过实例调用的
+    // 是直接调用，他的this指向就是window 而类中的方法 类给开
+    // 启了局部严格模式 所以this指向为undefined，
+    
+    //  this指向weather实例对象它里面有个原型对象里面有changeWeather
+    // 和renden和setState和constructor等在继续找原型对象就找到了父类
+    // 被继承的那个原型对像上react.compontend 有个setState设置状态的
+
+    
+//    在p14 中10分钟哪里解决了onclick= this.changeWeather 的疑问
+// 函数调用没有return的话返回的是undefined 如果点击后调用得是函数的返回值(function())
+// 这种 若没有return就是undefined
+    //    
+ -->
+</html>

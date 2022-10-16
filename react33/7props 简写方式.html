@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Person extends React.Component{
+               // 开发中 想限制数字是nmb类型的 名字不能为空 性别默认男
+        // 因为标签传过来的数据在组件实例props上
+        // 因为 props在组件的实例上 所以要想限制peops里面的属性就
+        // 需要用props
+        // 对标签属性和类型进行设置
+        // static 后面写函数 是忘类的自身加属性
+        static proptypes={ //这种形式下 react就可以进行限制 protypes是react的规矩
+            //  propTypes是react的属性 不可更改
+            name:React.Proptypes.string.isRequired , //Prototypes是react里面的内
+            // 置对象与上面的不同
+            sex:React.Proptypes.string,//限制性别
+            age:React.Proptypes.number,//限制age为数值
+            speak:React.Proptypes.func//限制speak为函数
+        }
+        // 默认值设置
+        static defaultProps={
+            // 这是设置props里面默认的值
+            sex:"男",
+            age:18
+        }
+            render(){
+                // props是只读的
+                const {name,age,sex}= this.props;
+                return (
+                    <ul>
+                <li>姓名:{name}</li>    
+                <li>年龄{age}</li>    
+                <li>性别{sex}</li>    
+                    </ul>
+                )
+            }
+        }
+     
+
+        const p = {name:"kkk",age:20,sex:"nv"}
+        // <Person name="jerry" age={19} sex="nv"/> 这里的age要是写成字符串想要加
+        // 一时就会变成字符串拼接，所以要改成js形式加{}  但是在别人传过来时
+        // 并不知道会加减等操作 所以要进行限制 (react里面不认识 直接写的 19)
+        ReactDom.render(<Person name="jerry" age={19} sex="nv" 
+        speak={speak}/>,document.querySelector("div"))
+        
+        ReactDom.render(<Person {...p}/>,
+        document.querySelector("div"))
+    // 在js中 ...是展开运算符可以展开数组但是不能展开对象
+    //js中 var a =（...b）这是复制对象 改变任何一个另一个都会改变
+    // 在react中可以用展开运算符展开对象 但是仅仅可以在标签属性的传递
+    // let posn = {...pson1,name:"jack"}//复制对象的同时修改了属性 相当于合并
+
+  </script>
+</body>
+</html>
