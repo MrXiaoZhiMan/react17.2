@@ -18,12 +18,12 @@ export default class ReactEventProcess extends Component{
     showData2=(event)=>{//event.target可以获取到发生事件的dom元素对象
    console.log(event.target.value);
     }
-    render(){
+    render(){ 
         return(
             <div>
               <input ref={this.myRef}  type="text" />  
               <button onClick={this.showData}>dianji1</button>
-            
+             <input type="text" />
              <input onBlur={this.showData2} type="text" />
              {/* 发生事件的元素就是你要操作的元素可以省略ref */}
              </div>
